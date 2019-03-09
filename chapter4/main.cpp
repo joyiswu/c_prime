@@ -82,13 +82,17 @@ void strtype1(){
  */
 
 // 4.11 structur
-struct inflatable{
-    char name[20];
-    float volume;
-    double price;
-};
 
-void structur(){
+
+void structur()
+{
+
+    struct inflatable{
+        char name[20];
+        float volume;
+        double price;
+    };
+
     using namespace std;
     inflatable guest ={
             "Glorious Gloria",
@@ -109,6 +113,12 @@ void structur(){
 
 // 4.12 assigning structures
 void assgn_st(){
+    struct inflatable{
+        char name[20];
+        float volume;
+        double price;
+    };
+
     using namespace std;
     inflatable bouquet = {
             "sunflowers",
@@ -211,16 +221,118 @@ void arraynew()
 void addpntrs(){
     using namespace std;
     double wages[3] = {10000.0, 20000.0, 30000.0};
-    short stacks[3] = {3, 2, 1};
+    int stacks[3] = {3, 2, 1};
 
     // Here are two ways to get the address of an array
     double * pw = wages; // name of an array = address
-    short * ps = &stacks[0]; // use address operator
+    int * ps = &stacks[0]; // use address operator
+
+    // with array element
+    cout << "pw = " << pw << ", *pw = " <<  *pw << endl;
+    pw = pw + 1;
+    cout << "add 1 to the pw pointer: \n" << "pw = " << pw << ", *pw = " << *pw << endl << "\n";
+
+    cout << "ps = " << ps << ", *ps = " <<  *ps << endl;
+    ps = ps + 1;
+    cout << "add 1 to the ps pointer: \n" << "ps = " << ps << ", *ps = " << *ps << endl << "\n";
+
+    cout << "access two elements with array notation\n" << "stacks[0] = " << stacks[0];
+    cout << ", stack[1] = " << stacks[1] << endl;
+
+    cout << "access two elements with pointer notation\n" << "*stacks = " << *stacks;
+    cout << ", *(stacks + 1) = " << *(stacks + 1) << endl;
+
+    cout << sizeof(wages) << " = size of wages array" << endl;
+    cout << sizeof(pw) << " = size of pw pointer" << endl;
 }
 
+// 4.20 ptrstr
+// using pointers to string
+void ptrstr()
+{
+    using namespace std;
+    char animal[20] = "bear";
+    const char * bird = "wren";
+    char * ps; //uninitializedd
+
+    cout << animal << " and "; //display bear
+    cout << bird << "\n"; //display wren
+    // cout << ps << endl;
+
+    cout << "Enter a kind of animal: ";
+    cin >> animal;
+    // cin >> ps: Too horrible a blunder to try: ps doesn't point to
+    // allocated space
+
+    ps = animal;
+    cout << ps << "s!\n";
+    cout << "Before using strcpy(): \n";
+    cout << animal << " at " << (int *) animal << endl;
+    cout << ps << " at " << (int *)ps << endl;
+
+    ps = new char[strlen(animal) + 1]; // get new storage
+    strcpy(ps, animal); // copy string to new storage
+    cout << "Affer using strcpy(): \n";
+    cout << animal << " at " << (int *)animal << endl;
+    cout << ps << " at " << (int *)ps << endl;
+    delete [] ps;
+}
+
+// 4.21 newstrct
+// using new with a strcuture
+void newstrct()
+{
+    struct inflatable{
+        char name[20];
+        float volume;
+        double price;
+    };
+
+    using namespace std;
+    inflatable * ps = new inflatable; // allow memory for structure
+    cout << "Enter name of inflatable item: ";
+    cin.get(ps->name, 20); // method 1 for member access
+    cout << "Enter volume in cubic feet: ";
+    cin >> (*ps).volume; // method 2 for member access
+    cout<< "Enter price: $";
+    cin >> ps->price;
+    cout << "Name: " << (*ps).name << endl; //method 2
+    cout << "VolmeL:" << ps->volume << " cublic feet\n"; // method 1
+    cout << "Price: $" << ps->price << endl; // method 1
+    delete ps;
+}
+
+// 4.22 delete
+// using the delete operator
+char * getname(void);
+
+void delete_cpp(){
+    using namespace std;
+    char * name; // create pointer but no storage
+
+    name = getname(); // assign address of string to name
+    cout << name << " at " << (int *)name << "\n";
+    delete [] name; // memory freed
+
+    name = getname(); // reuse freed memory
+    cout << name << " at " << (int *)name << "\n";
+    delete [] name;
+}
+
+char * getname(){
+    using namespace std;
+    char temp[80]; // temporary storage
+    cout << "Enrer last name: ";
+    cin >> temp;
+
+    char * pn = new char[strlen(temp) + 1];
+    strcpy(pn, temp); // copy string into smaller space
+
+    return pn; // temp lost when function ends
+}
 
 int main() {
 
-    arraynew();
+    delete_cpp();
 }
 
