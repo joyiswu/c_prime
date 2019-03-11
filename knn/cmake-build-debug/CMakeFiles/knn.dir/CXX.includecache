@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/joy/Desktop/code/c++/c_prime/knn/main.cpp
+iostream
+-
+map
+-
+string
+-
+sstream
+-
+fstream
+-
+cmath
+-
+

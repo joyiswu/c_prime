@@ -1,0 +1,3 @@
+/Users/joy/Desktop/code/c++/c_prime/knn/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/joy/Desktop/code/c++/c_prime/knn/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/joy/Desktop/code/c++/c_prime/knn/cmake-build-debug/CMakeFiles/knn.dir
